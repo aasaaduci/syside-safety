@@ -12,7 +12,7 @@ This analyzer:
 5. Generates complete fault trees with mode propagation
 6. Produces FMEA with risk assessment
 """
-# %%
+
 from __future__ import annotations
 
 import argparse
@@ -28,7 +28,7 @@ from enum import Enum
 
 import syside
 
-SYSML_DIR = r"C:\Users\jaege\Dropbox\analysis"
+CURRENT_DIR = pathlib.Path(__file__).parent
 
 # ============================================================================
 # Failure Mode Enum
@@ -171,7 +171,7 @@ class SafetyAnalyzer:
                 hazard_node = self._parse_hazard(req)
                 if hazard_node:
                     self.hazards[hazard_node.hazard_id] = hazard_node
-                    #print(f"  Extracted hazard: {hazard_node.hazard_id} - {hazard_node.title}")
+                    print(f"  Extracted hazard: {hazard_node.hazard_id} - {hazard_node.title}")
         #print(f"Total hazards extracted: {len(self.hazards)}")
 
     def extract_actions(self) -> None:
@@ -192,7 +192,6 @@ class SafetyAnalyzer:
         print("\nExtracting data flows...")
 
         for flow in self.model.elements(syside.FlowUsage):
-
             try: 
                 # Get source and target (connector ends)
                 source_action = flow.source.name
@@ -443,7 +442,6 @@ class SafetyAnalyzer:
 
         visited.add(path_id)
 
-
         action = self.actions.get(action_name)
         if not action:
             return []
@@ -492,7 +490,6 @@ class SafetyAnalyzer:
         #print("="*80)
 
         for hazard_id in self.hazards.keys():
-            
             self.fault_trees[hazard_id] = self.analyze_backward_from_hazard(hazard_id)
 
         return self.fault_trees
@@ -712,7 +709,7 @@ def main():
     if args.directory:
         model_dir = pathlib.Path(args.directory)
     else:
-        model_dir = SYSML_DIR
+        model_dir = CURRENT_DIR
 
     model_files = syside.collect_files_recursively(model_dir)
     #print(f"Found {len(model_files)} .sysml files\n")
@@ -736,15 +733,5 @@ def main():
     print(f"  • {args.fmea}")
     print(f"  • {args.report}")
 
-# %%
 if __name__ == "__main__":
     main()
-
-    # # %%
-    # # For interactive testing
-    # model_files = syside.collect_files_recursively(SYSML_DIR)
-    # analyzer = SafetyAnalyzer(model_files)
-    # analyzer.extract_all_data()
-
-
-# %%

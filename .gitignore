@@ -1,0 +1,7 @@
+*.png
+*.json
+diagrams/
+*.csv
+*.txt
+*.pyc
+
