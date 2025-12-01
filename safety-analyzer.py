@@ -28,7 +28,7 @@ from enum import Enum
 
 import syside
 
-SYSML_DIR = r"C:\Users\jaege\Dropbox\analysis"
+CURRENT_DIR = pathlib.Path(__file__).parent
 
 # ============================================================================
 # Failure Mode Enum
@@ -712,7 +712,7 @@ def main():
     if args.directory:
         model_dir = pathlib.Path(args.directory)
     else:
-        model_dir = SYSML_DIR
+        model_dir = CURRENT_DIR
 
     model_files = syside.collect_files_recursively(model_dir)
     #print(f"Found {len(model_files)} .sysml files\n")
@@ -742,7 +742,7 @@ if __name__ == "__main__":
 
     # # %%
     # # For interactive testing
-    # model_files = syside.collect_files_recursively(SYSML_DIR)
+    # model_files = syside.collect_files_recursively(CURRENT_DIR = pathlib.Path(__file__).parent)
     # analyzer = SafetyAnalyzer(model_files)
     # analyzer.extract_all_data()
 

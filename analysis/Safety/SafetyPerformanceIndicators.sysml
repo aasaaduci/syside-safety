@@ -3,6 +3,7 @@ doc /* Safety Performance Indicators (SPIs) for Runtime Monitoring */
 private import GARC_Model::*;
 private import ScalarValues::*;
 private import SI::*;
+public import SafetyPerformanceIndicators_Enhanced::*;
 
 // SPI metadata structure
 requirement def SPIMetadata {

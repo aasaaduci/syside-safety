@@ -13,7 +13,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action validateGeo : EnhancedPayloadActions::ValidateGeofence;
+            perform action validateGeo : PayloadActions::ValidateGeofence;
         }
         bind ddsPort.sub = run.validateGeo.currentPosition;
         bind ddsPort.sub = run.validateGeo.geofenceBoundary;
@@ -28,7 +28,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action loadGeo : EnhancedPayloadActions::LoadGeofenceDefinition;
+            perform action loadGeo : PayloadActions::LoadGeofenceDefinition;
         }
         bind ddsPort.sub = run.loadGeo.missionPlan;
         bind ddsPort.sub = run.loadGeo.securityToken;
@@ -43,7 +43,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action loadRules : EnhancedPayloadActions::LoadROE;
+            perform action loadRules : PayloadActions::LoadROE;
         }
         bind ddsPort.sub = run.loadRules.missionPlan;
         bind ddsPort.sub = run.loadRules.securityToken;
@@ -58,7 +58,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action enable : EnhancedPayloadActions::EnableActuation;
+            perform action enable : PayloadActions::EnableActuation;
         }
         bind ddsPort.sub = run.enable.payloadState;
         bind ddsPort.sub = run.enable.interlockRecheck;
@@ -73,7 +73,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action detect : EnhancedPayloadActions::DetectTarget;
+            perform action detect : PayloadActions::DetectTarget;
         }
         bind ddsPort.sub = run.detect.imageData;
         bind ddsPort.sub = run.detect.radarData;
@@ -89,7 +89,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action validate : EnhancedPayloadActions::ValidateTarget;
+            perform action validate : PayloadActions::ValidateTarget;
         }
         bind ddsPort.sub = run.validate.detectedTarget;
         bind ddsPort.sub = run.validate.rulesOfEngagement;
@@ -105,7 +105,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action verifyActuationResult : EnhancedPayloadActions::VerifyActuationResult;
+            perform action verifyActuationResult : PayloadActions::VerifyActuationResult;
         }
         bind ddsPort.sub = run.verifyActuationResult.actuationStatus;
         bind ddsPort.sub = run.verifyActuationResult.hardwareFeedback;
@@ -120,7 +120,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action monitor : EnhancedPayloadActions::MonitorPayloadTemperature;
+            perform action monitor : PayloadActions::MonitorPayloadTemperature;
         }
         bind ddsPort.sub = run.monitor.temperatureSensor;
         bind ddsPort.sub = run.monitor.temperatureThreshold;
@@ -135,7 +135,7 @@ package EnhancedPayloadSoftware {
             out pub;
         }
         action run {
-            perform action log : EnhancedPayloadActions::LogPayloadEvents;
+            perform action log : PayloadActions::LogPayloadEvents;
         }
         bind ddsPort.sub = run.log.armingEvents;
         bind ddsPort.sub = run.log.actuationEvents;
@@ -150,7 +150,7 @@ package EnhancedLocalizationSoftware {
     private import ScalarValues::*;
     private import SI::*;
     private import Localization::*;
-    private import EnhancedLocalizationActions::*;
+    private import LocalizationActions::*;
 
     
     part def GNSSBackupProcessor {
@@ -235,7 +235,7 @@ package EnhancedCommunicationSoftware {
     private import ScalarValues::*;
     private import SI::*;
     private import Communication::*;
-    private import EnhancedCommunicationActions::*;
+    private import CommunicationActions::*;
     
 
     part def BackupLinkHandler {
